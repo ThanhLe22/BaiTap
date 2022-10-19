@@ -1,27 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-/*
-Viet chuong trinh nhap cac so ngau nhien, roi luu vao mang arr[]
-Nhan 1: Sap xep theo thu tu be den lon
-Nhan 2: Sap xep theo thu tu lon den be
-Nhan 3: Tim so lon nhat
-*/ 
-
-typedef struct typeArr
-{
+typedef struct typeArr{
     int *arr;
     int size;
-} tArr;
-
-void beDenLon(tArr *value){
+}tArr;
+void Bedenlon(tArr *value){
     int temp = 0;
-    for (int i = 0; i < value->size; i++)
+    for(int i = 0; i < value->size;i++)
     {
-        for (int j = i + 1; j < value->size; j++)
+        for(int j = i + 1;j < value->size;j++)
         {
-            if (value->arr[i] > value->arr[j])
-            {       
+            if(value->arr[i] > value->arr[j])
+            {
                 temp = value->arr[i];
                 value->arr[i] = value->arr[j];
                 value->arr[j] = temp;
@@ -29,36 +20,33 @@ void beDenLon(tArr *value){
         }
     }
 }
-
-void lonDenBe(tArr *value){
+void londenbe(tArr *value){
     int temp = 0;
-    for (int i = 0; i < value->size; i++)
-    {
-        for (int j = i + 1; j < value->size; j++)
+    for(int i = 0;i < value->size;i++){
+        for(int j = i + 1;j < value->size;j++)
         {
-            if (value->arr[i] < value->arr[j])
-            {       
-                temp = value->arr[i];
+            if(value->arr[i] < value->arr[i])
+            {
+                temp = 0;
                 value->arr[i] = value->arr[j];
                 value->arr[j] = temp;
             }
         }
     }
-}
 
-int timSoLonNhat(tArr *value){
-    int max = -1e9;
-    for (int i = 0; i < value->size; i++)
+}
+void TimMax(tArr *value){
+    int Max = value->arr[0];
+    for(int i = 0; i < value->size;i++)
     {
-        if (max < value->arr[i])
+        if(Max < value->arr[i])
         {
-            max = value->arr[i];
+            Max = value->arr[i];
         }
     }
-    return max;
+    return Max;
 }
-
-struct typeArr *nhapThongTin(){
+struct typeArr *NhapThongTin(){
     //Khai bao bien a kieu du lieu typeArr
     static tArr a; 
     printf("Nhap so phan tu trong mang: ");
@@ -77,42 +65,52 @@ struct typeArr *nhapThongTin(){
 
 int main(int argc, char const *argv[])
 {
-    //Khai bao con tro (de chua dia chi) kieu typeArr
-    tArr *test;
-    test = nhapThongTin();
-    printf("So phan tu trong mang: %d\n",test->size);
-    printf("Mang da nhap la: ");
-    for (int i = 0; i < test->size; i++)
+    tArr *check;
+    check = NhapThongTin();
+    printf("Nhap so phan tu trong mang arr[%d]: \n",check->size);
+    printf("Mang da nhap: ");
+    for(int i = 0; i < check->size; i++)
     {
-        // test->arr[i]) = *(test->arr + i)): Tinh chat trong mang
-        printf("%d  ",*(test->arr + i));
+        printf("Arr[%d]: \n",(check->arr + i));
     }
-    
 
-    int opt;
-    do
+
+printf("Nhan phim 1: Sap xep tu be den lon");
+printf("Nhan phim 2: Sap xep tu lon den be");
+printf("Nhan phim 3: Tim so lon nhat");
+int opt;
+printf("Your choice:");
+scanf("%d",&opt);
+switch(opt)
+{
+    case 1:
     {
-        printf("\nNhap che do: ");
-        scanf("%d",&opt);
-    } while (opt < 0 || opt > 3);
-    
-    if (opt == 1)
-    {
-        beDenLon(test);
-        printf("Mang da sap xep tu be den lon la: ");
-        for (int i = 0; i < test->size; i++){
-            printf("%d  ",*(test->arr + i));
+        Bedenlon(check);
+        printf("Mang da sap xep tu be den lon");
+    for (int i=0; i < check->size; i++)
+            {
+                printf(" %d", *(check->arr + i));
+            }
+            break;
         }
-    }else if (opt == 2)
-    {
-        lonDenBe(test);
-        printf("Mang da sap xep tu lon den be la: ");
-        for (int i = 0; i < test->size; i++){
-            printf("%d  ",*(test->arr + i));
+        case 2:
+        {
+            londenbe(check);
+            printf("Mang sap xep tu lon den be la:\n");
+             for (int i=0; i < check->size; i++)
+            {
+                printf(" %d", check->arr[i]);
+            }
+            break;
         }
-    }else{
-        timSoLonNhat(test);
-        printf("So lon nhat trong mang la: %d\n",timSoLonNhat(test));
+
+        case 3:
+        {
+            TimMax(check);
+            break;
+        }
+        default:
+        printf("Nhap so khong chinh xac!");
     }
     return 0;
 }
