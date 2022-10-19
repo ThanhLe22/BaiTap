@@ -44,7 +44,7 @@ void TimMax(tArr *value){
             Max = value->arr[i];
         }
     }
-    return Max;
+    printf("So lon nhat la: %d",Max);
 }
 struct typeArr *NhapThongTin(){
     //Khai bao bien a kieu du lieu typeArr
