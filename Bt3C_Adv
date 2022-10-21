@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+// cho ngau nhien 3 loai tat trong 1 thung, đem moi loại tat
+typedef enum {RED, YELLOW, BLUE } Tat;
+typedef struct 
+{
+    Tat *ptr; // luu dia chi dau tien cua mang
+    int size; // luu kich thuoc cua mang
+}box;
+void ThongTin(box *info)
+{
+    char tat[10];
+    printf("Nhap so tat: ");
+    scanf("%d",&info->size);
+    info->ptr = (Tat*)malloc(info->size * sizeof(Tat));
+
+      for (int i = 0; i < info->size; i++)
+    {
+        lable:
+        printf("Nhap gia tri tai arr[%d] = ", i);
+    
+        scanf("%s",tat);
+
+        if( strcmp ((char*)"RED",tat)== 0){
+            info->ptr[i]= RED;
+        }else if(strcmp ((char*)"YELLOW",tat)== 0){
+            info->ptr[i]= YELLOW;
+        }else if(strcmp ((char*)"BLUE  ",tat)== 0){
+            info->ptr[i]= BLUE;
+        }
+        }else{
+            printf("Nhap sai cu phap!!!\n");
+            goto lable;
+    }
+}
+   void count(box *info) {
+  int red = 0;
+  int yellow = 0;
+  int blue = 0;
+
+  for (int i = 0; i < info->size; i++) {
+    switch (info->ptr[i]) {
+    case RED:
+      red++;
+      goto label;
+    case YELLOW:
+      yellow++;
+      goto label;
+    case BLUE:
+      blue++;
+      goto label;
+    default:
+      printf("ERROR\n");
+    }
+  label:;
+  }
+    printf("doi tat do: %d \n", red / 2);
+    printf("doi tat vang: %d ", yellow / 2);
+    printf("doi tat xanh: %d \n", blue / 2);
+    printf("tong so tat: %d", red / 2 + yellow / 2 + blue / 2);
+}
+   
+    int main(int argc, char const *argv[])
+    {
+        box info;
+        ThongTin(&info);
+        count(&info);
+        return 0;
+    }
+
+
